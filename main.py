@@ -2,7 +2,7 @@
 """
 Automated Directory Structure Builder, By The Grace of Master Oogway
 
-Usage: python main.py flask project_name
+Usage: main.py project_name --type project_type
 """
 
 __authors__ = "Arhit Bose Tagore, Priyanshu Kumar"
@@ -11,11 +11,12 @@ __license__ = "MIT"
 
 import sys
 import os 
+import click
 
-def flask(lst):
+def flask(name):
     """ Flask entry point of the app """
     cwd = os.getcwd()
-    directory = lst[2]
+    directory = name
     path = cwd+"/"+directory
 
     try:
@@ -33,16 +34,29 @@ def flask(lst):
 
         if not os.path.exists(path+'/static'):
             os.makedirs(path+'/static')
-            
+
     except OSError as error:
         print(error)
         
+# def django(lst):
+#     pass
 
+# def react(lst):
+#     pass
+
+# def angular(lst):
+#     pass
+
+@click.command()
+@click.argument('name')
+@click.option('--type',type=str,help="The type of project you are going to work on.")
+def run(type,name):
+    """ This is executed when run from the command line """
+    #lst = sys.argv
+
+    if type.casefold() == 'flask':
+        flask(name)
 
 
 if __name__ == "__main__":
-    """ This is executed when run from the command line """
-    lst = sys.argv
-
-    if lst[1].casefold() == 'flask':
-        flask(lst)
+    run()
