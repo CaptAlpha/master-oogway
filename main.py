@@ -293,6 +293,8 @@ def run(type, name):
     if type.casefold() == 'angular':
         angular(name)
 
+    if type.casefold() == 'flutter':
+        flutter(name)
 
 if __name__ == "__main__":
     run()
