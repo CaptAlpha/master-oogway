@@ -9,6 +9,9 @@ __authors__ = "Arhit Bose Tagore, Priyanshu Kumar"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
+# TODO:
+# initialise all the .py files in django
+
 import sys
 import os
 import click
@@ -24,17 +27,11 @@ def flask(name):
         if not os.path.exists(path):
             os.makedirs(path)
 
-        if not os.path.exists(path + '/templates'):
-            os.makedirs(path + '/templates')
+        arr_flask = ['/templates', '/templates/auth', '/templates/blog', '/static']
 
-        if not os.path.exists(path + '/templates/auth'):
-            os.makedirs(path + '/templates/auth')
-
-        if not os.path.exists(path + '/templates/blog'):
-            os.makedirs(path + '/templates/blog')
-
-        if not os.path.exists(path + '/static'):
-            os.makedirs(path + '/static')
+        for i in arr_flask:
+            if not os.path.exists(path + i):
+                os.makedirs(path + i)
 
         file = open(path + "/__init__.py", "w")
         file.write("""
@@ -94,35 +91,20 @@ def django(name):
         if not os.path.exists(path):
             os.makedirs(path)
 
-        if not os.path.exists(path + '/docs'):
-            os.makedirs(path + '/docs')
+        arr_django1 = ['/docs', '/scripts', '/static', '/templates', '/tests', '/tmp']
 
-        if not os.path.exists(path + '/scripts'):
-            os.makedirs(path + '/scripts')
+        for i in arr_django1:
+            if not os.path.exists(path + i):
+                os.makedirs(path + i)
 
         if not os.path.exists(path + '/' + name):
             os.makedirs(path + '/' + name)
 
-        if not os.path.exists(path + '/' + name + '/apps'):
-            os.makedirs(path + '/' + name + '/apps')
+        arr_django2 = ['/apps', '/apps/accounts', '/settings']
 
-        if not os.path.exists(path + '/' + name + '/apps/accounts'):
-            os.makedirs(path + '/' + name + '/apps/accounts')
-
-        if not os.path.exists(path + '/' + name + '/settings'):
-            os.makedirs(path + '/' + name + '/settings')
-
-        if not os.path.exists(path + '/static'):
-            os.makedirs(path + '/static')
-
-        if not os.path.exists(path + '/templates'):
-            os.makedirs(path + '/templates')
-
-        if not os.path.exists(path + '/tests'):
-            os.makedirs(path + '/tests')
-
-        if not os.path.exists(path + '/tmp'):
-            os.makedirs(path + '/tmp')
+        for i in arr_django2:
+            if not os.path.exists(path + '/' + name + i):
+                os.makedirs(path + '/' + name + i)
 
         file = open(path + "/setup.py", "w")
         file.write("""
@@ -141,53 +123,127 @@ setup(
         """)
         file.close()
 
-        file = open(path + "/requirements.txt", "w")
-        file.write(""" """)
+        arr_django3 = ['/requirements.txt','/requirements_dev.txt','/pytest.ini']
+
+        for i in arr_django3:
+            file = open(path + i, "w")
+            file.write(""" """)
+            file.close()
+
+        # Haven't added .py files in loop as we need to initialise all these with code
+
+        file = open(path + "/apps/__init__.py", "w")
+        file.write(""" . """)
         file.close()
 
-        file = open(path + "/requirements_dev.txt", "w")
-        file.write("""  """)
+        file = open(path + "/settings/__init__.py", "w")
+        file.write(""" . """)
         file.close()
 
-        file = open(path + "/pytest.ini", "w")
-        file.write(""" """)
+        file = open(path + "/settings/production.py", "w")
+        file.write(""" . """)
         file.close()
 
-        # file = open(path + "/apps/__init__.py", "w")
-        # file.write(""" """)
-        # file.close()
+        file = open(path + "/settings/development.py", "w")
+        file.write(""" . """)
+        file.close()
 
-        # file = open(path + "/settings/__init__.py", "w")
-        # file.write(""" """)
-        # file.close()
+        file = open(path + '/' + name + "/__init__.py", "w")
+        file.write(""" . """)
+        file.close()
 
-        # file = open(path + "/settings/production.py", "w")
-        # file.write(""" """)
-        # file.close()
+        file = open(path + '/' + name + "/urls.py", "w")
+        file.write(""" . """)
+        file.close()
 
-        # file = open(path + "/settings/development.py", "w")
-        # file.write(""" """)
-        # file.close()
-
-        # file = open(path + '/' + name + "/__init__.py", "w")
-        # file.write(""" """)
-        # file.close()
-
-        # file = open(path + '/' + name + "/urls.py", "w")
-        # file.write(""" """)
-        # file.close()
-
-        # file = open(path + '/' + name + "/wsgi.py", "w")
-        # file.write(""" """)
-        # file.close()
+        file = open(path + '/' + name + "/wsgi.py", "w")
+        file.write(""" . """)
+        file.close()
 
     except OSError as error:
         print(error)
 
-# def react(lst):
+
+def react(name):
+    """ React entry point of the app """
+    cwd = os.getcwd()
+    directory = name
+    path = cwd + "/" + directory
+
+    try:
+        if not os.path.exists(path):
+            os.makedirs(path)
+        arr_react1 = ['/common','/feed','/profile']
+
+        for i in arr_react1:
+            if not os.path.exists(path + i):
+                os.makedirs(path + i)
+
+        arr_react2 = ['/common/Avatar.js', '/common/Avatar.css', '/common/APIUtils.js',
+                      '/common/APIUtils.test.js', '/feed/index.js', '/feed/Feed.js',
+                      '/feed/Feed.css', '/feed/FeedStory.js', '/feed/FeedStory.test.js',
+                      '/feed/FeedAPI.js', '/profile/index.js', '/profile/Profile.js',
+                      '/profile/ProfileHeader.js', '/profile/ProfileHeader.css', '/profile/ProfileAPI.js']
+
+        for i in arr_react2:
+            file = open(path + i, "w")
+            file.write(""" . """)
+            file.close()
+
+    except OSError as error:
+        print(error)
+
+
+def angular(name):
+    """ Angular entry point of the app """
+    cwd = os.getcwd()
+    directory = name
+    path = cwd + "/" + directory
+
+    try:
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        arr_react1 = ['/src','/node_modules','/src/app','/src/assets','/src/environments']
+
+        for i in arr_react1:
+            if not os.path.exists(path + i):
+                os.makedirs(path + i)
+
+        arr_react2 = ['/.editorconfig', '/.gitignore', '/README.md',
+                      '/angular.json', '/package.json', '/package-lock.json',
+                      '/tsconfig.json', '/src/index.html', '/src/main.ts',
+                      '/src/polyfills.ts', '/src/styles.sass', '/src/test.ts',
+                      '/src/app/app.component.ts', '/src/app/app.component.html', '/src/app/app.component.css',
+                      '/src/app/app.component.spec.ts','/src/app/app.module.ts']
+
+        for i in arr_react2:
+            file = open(path + i, "w")
+            file.write(""" . """)
+            file.close()
+
+    except OSError as error:
+        print(error)
+
+# def flutter(lst):
 #     pass
 
-# def angular(lst):
+# def rubyonrails(lst):
+#     pass
+
+# def vue(lst):
+#     pass
+
+# def laravel(lst):
+#     pass
+
+# def meteor(lst):
+#     pass
+
+# def express(lst):
+#     pass
+
+# def spring(lst):
 #     pass
 
 @click.command()
